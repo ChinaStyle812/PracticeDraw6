@@ -26,6 +26,7 @@ public class Practice04Alpha extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    private int transState;
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -36,7 +37,18 @@ public class Practice04Alpha extends RelativeLayout {
         animateBt.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(final View v) {
-                // TODO 在这里处理点击事件，通过 View.animate().alpha() 来改变 View 的透明度
+                // 通过 View.animate().alpha() 来改变 View 的透明度
+                switch (++transState) {
+                    case 1:
+                        imageView.animate().alpha(0.1f);
+                        break;
+                    case 2:
+                        imageView.animate().alpha(1);
+                        break;
+                    default:
+                        break;
+                }
+                transState = transState >= 2 ? 0 : transState;
             }
         });
     }

@@ -26,6 +26,7 @@ public class Practice03Scale extends RelativeLayout {
         super(context, attrs, defStyleAttr);
     }
 
+    private int transState;
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -36,7 +37,24 @@ public class Practice03Scale extends RelativeLayout {
         animateBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
-                // TODO 在这里处理点击事件，通过 View.animate().scaleX/Y() 来让 View 放缩
+                // 通过 View.animate().scaleX/Y() 来让 View 放缩
+                switch (++transState) {
+                    case 1:
+                        imageView.animate().scaleX(1.5f).scaleY(1.5f);
+                        break;
+                    case 2:
+                        imageView.animate().scaleX(1).scaleY(1);
+                        break;
+                    case 3:
+                        imageView.animate().scaleY(0.5f).scaleX(0.5f);
+                        break;
+                    case 4:
+                        imageView.animate().scaleY(1).scaleX(1);
+                        break;
+                    default:
+                        break;
+                }
+                transState = transState >= 4 ? 0 : transState;
             }
         });
     }
